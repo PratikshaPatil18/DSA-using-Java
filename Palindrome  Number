@@ -1,0 +1,35 @@
+class Solution {
+
+    // Approach 1: Using String (Simple)
+    public boolean isPalindromeString(int x) {
+        if (x < 0) return false; // negatives are not palindrome
+
+        String s = String.valueOf(x);
+        int left = 0, right = s.length() - 1;
+
+        while (left < right) {
+            if (s.charAt(left) != s.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+
+    // Approach 2: Reverse Half of the Number (Optimized, no String)
+    public boolean isPalindrome(int x) {
+        // negative numbers or multiples of 10 (except 0) are not palindrome
+        if (x < 0 || (x % 10 == 0 && x != 0)) return false;
+
+        int reversedHalf = 0;
+        while (x > reversedHalf) {
+            reversedHalf = reversedHalf * 10 + x % 10;
+            x /= 10;
+        }
+
+        // even length: x == reversedHalf
+        // odd length: ignore middle digit (reversedHalf/10)
+        return x == reversedHalf || x == reversedHalf / 10;
+    }
+}
