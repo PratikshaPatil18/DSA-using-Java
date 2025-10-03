@@ -1,0 +1,26 @@
+import java.lang.Math;
+class Solution{
+
+  public static String commonLongestPrefix(String [] str)
+  {
+    if(str == null || str.length == 0) return "";
+     String Prefix = str[0];
+    for(int i = 1;i<str.length;i++)
+      {
+      Prefix = commonPrefix(Prefix , str[i]);
+
+      if(Prefix.isEmpty()) return "" ;
+      }
+    return Prefix;
+  }
+  private static String commonPrefix(String s1 , String s2){
+   int i =0;
+    int Minlen = Math.min(s1.length(), s2.length());
+
+    while( i < Minlen && s1.charAt(i) == s2.charAt(i) )
+      {
+      i++;
+      }
+    return s1.substring(0,i) ;
+  }
+}
