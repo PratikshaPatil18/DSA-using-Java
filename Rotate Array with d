@@ -1,0 +1,42 @@
+import java.util.*;
+
+class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter array length = ");
+        int n = sc.nextInt();
+
+        int arr[] = new int[n];
+        System.out.println("Enter array elements:");
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.nextInt();
+        }
+
+        int d = 2;  // number of rotations
+        d = d % n;  // handle if d > n
+
+        int temp[] = new int[d]; // store last d elements
+
+        // Step 1: copy last d elements
+        for (int i = 0; i < d; i++) {
+            temp[i] = arr[n - d + i];
+        }
+
+        // Step 2: shift remaining elements to the right
+        for (int i = n - 1; i >= d; i--) {
+            arr[i] = arr[i - d];
+        }
+
+        // Step 3: copy temp elements at the start
+        for (int i = 0; i < d; i++) {
+            arr[i] = temp[i];
+        }
+
+        // Step 4: print rotated array
+        System.out.print("Rotated array: ");
+        for (int i = 0; i < n; i++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+}
