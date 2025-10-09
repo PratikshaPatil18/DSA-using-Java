@@ -1,0 +1,27 @@
+import java.util.*;
+
+class Solution {
+    public int longestSubarray(int[] arr, int k) {
+      int len =0;
+      int sum =0;
+     HashMap<Integer , Integer> map = new HashMap<>();
+     
+     for(int i =0 ; i<arr.length; i++){
+         
+         sum +=arr[i];    //step 1 : adding sum of subarray 
+          
+          if(sum == k){
+              len = i + 1;  //step 2: calculate length
+          }
+          if(!map.containsKey(sum))   //step 3: put sum in map with index
+          {
+              map.put(sum , i);
+          }
+          if(map.containsKey(sum - k))  //step 4: calculate max len
+          {
+              len = Math.max(len , i - map.get(sum - k)); //get return idx
+          }
+     }
+      return len;
+    }
+}
