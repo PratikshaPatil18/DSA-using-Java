@@ -1,0 +1,21 @@
+import java.util.*;
+
+class Solution {
+    static ArrayList<Integer> leaders(int arr[]) {
+        ArrayList<Integer> ans = new ArrayList<>();
+        int n = arr.length;
+        
+        int max = arr[n - 1]; // rightmost element is always a leader
+        ans.add(max);
+        
+        for (int i = n - 2; i >= 0; i--) {
+            if (arr[i] >= max) {  // check against max seen so far
+                ans.add(arr[i]);
+                max = arr[i];
+            }
+        }
+        
+        Collections.reverse(ans); // to maintain left-to-right order
+        return ans;
+    }
+}
