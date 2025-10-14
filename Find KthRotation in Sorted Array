@@ -1,0 +1,22 @@
+class Solution {
+    public int findRotationCount(int[] nums) {
+        int left = 0, right = nums.length - 1;
+
+        // If array is already sorted (not rotated)
+        if (nums[left] <= nums[right]) return 0;
+
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+
+            // If mid element > right element, smallest is to the right
+            if (nums[mid] > nums[right]) {
+                left = mid + 1;
+            } else {
+                // Smallest is at mid or to the left
+                right = mid;
+            }
+        }
+
+        return left; // or right, both point to minimum element
+    }
+}
