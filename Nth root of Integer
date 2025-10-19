@@ -1,0 +1,31 @@
+class Solution {
+    public int nthRoot(int n, int m) {
+        int low = 1;
+        int high = m;
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            long power = power(mid, n , m);  //call helper
+
+            if (power == m) {
+                return mid;  // exact nth root found
+            } else if (power < m) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+        return -1; // not an integer root
+    }
+    
+    private long power(int mid , int n , int m ){
+        long result = 1;
+        for(int i = 1 ; i<= n ; i++){
+            result *= mid;
+        if(result > m) {
+            return  result;
+        }
+        }
+        return result;
+    }
+}
