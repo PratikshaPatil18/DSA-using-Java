@@ -1,0 +1,29 @@
+import java.util.*;
+
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int n = nums.length;
+        if (n <= 2) return n;
+
+        // We'll use a HashMap only for counting like your logic, 
+        // but still modify nums[] in-place (no new array)
+        HashMap<Integer, Integer> count = new HashMap<>();
+
+        int j = 0; // pointer for where to put next valid number
+
+        for (int i = 0; i < n; i++) {
+            int val = nums[i];
+            count.put(val, count.getOrDefault(val, 0) + 1);
+
+            // Only allow element if it appears ≤ 2 times
+            if (count.get(val) <= 2) {
+                nums[j] = nums[i];
+                j++;
+            }
+        }
+
+        return j; // number of valid elements (k)
+    }
+
+    
+}
