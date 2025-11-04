@@ -1,0 +1,19 @@
+class Solution {
+    public boolean isPalindrome(String s) {
+        // Step 1: remove non-alphanumeric characters and make lowercase
+        s = s.replaceAll("[^a-zA-Z0-9]", "").toLowerCase();
+
+        int left = 0;
+        int right = s.length() - 1;
+
+        // Step 2: check characters from both ends
+        while (left <= right) {
+            if (s.charAt(left) != s.charAt(right)) {
+                return false; // mismatch found
+            }
+            left++;
+            right--;
+        }
+        return true; // all characters matched
+    }
+}
