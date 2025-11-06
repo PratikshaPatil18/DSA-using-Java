@@ -1,0 +1,37 @@
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        HashMap<Character, Integer> map = new HashMap<>();
+
+        // Step 1: If lengths differ → not an anagram
+        if (s.length() != t.length()) {
+            return false;
+        }
+
+        // Step 2: Count frequency of each char in s
+        for (int i = 0; i < s.length(); i++) {
+            char data = s.charAt(i);
+            map.put(data, map.getOrDefault(data, 0) + 1);
+        }
+
+        // Step 3: Reduce frequency for each char in t
+        for (int i = 0; i < t.length(); i++) {
+            char ch = t.charAt(i);
+
+            // If char not found → not an anagram
+            if (!map.containsKey(ch)) {
+                return false;
+            }
+
+            // Decrease count
+            map.put(ch, map.get(ch) - 1);
+
+            // Remove from map if count becomes zero
+            if (map.get(ch) == 0) {
+                map.remove(ch);
+            }
+        }
+
+        // Step 4: If map is empty → all matched → anagram
+        return map.isEmpty();
+    }
+}
