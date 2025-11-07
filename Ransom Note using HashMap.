@@ -1,0 +1,28 @@
+import java.util.*;
+
+class Solution {
+    public boolean canConstruct(String ransomNote, String magazine) {
+        HashMap<Character, Integer> map = new HashMap<>();
+
+        // Count each character in the magazine
+        for (int i = 0; i < magazine.length(); i++) {
+            char c = magazine.charAt(i);
+            map.put(c, map.getOrDefault(c, 0) + 1);
+        }
+
+        // Check if ransomNote can be formed
+        for (int i = 0; i < ransomNote.length(); i++) {
+            char ch = ransomNote.charAt(i);
+            
+            // If character not present or used up → cannot construct
+            if (!map.containsKey(ch) || map.get(ch) == 0) {
+                return false;
+            }
+            
+            // Reduce count since we used one
+            map.put(ch, map.get(ch) - 1);
+        }
+
+        return true; // All letters found
+    }
+}
