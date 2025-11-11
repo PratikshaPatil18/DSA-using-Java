@@ -1,0 +1,36 @@
+/*
+class Node {
+    int data;
+    Node left, right;
+    Node(int item){
+        data = item;
+        left = right = null;
+    }
+}
+*/
+
+class Solution {
+    ArrayList<Integer> preOrder(Node root) {
+    
+        ArrayList<Integer> preResult = new ArrayList<>();
+        
+        Stack <Node> stack = new Stack<Node>();
+        
+        if(root == null) return preResult;
+        
+        stack.push(root);
+        
+        while(!stack.isEmpty()){
+            
+            Node node = stack.pop();
+            
+            preResult.add(node.data);
+            
+            if(node.right != null) stack.push(node.right);
+            if(node.left != null) stack.push(node.left);
+            
+            
+        }
+        return preResult;
+    }
+}
