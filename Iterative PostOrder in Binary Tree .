@@ -1,0 +1,35 @@
+/*
+class Node {
+    int data;
+    Node left, right;
+    Node(int val){
+        data = val;
+        left = right = null;
+    }
+}
+*/
+
+import java.util.*;
+
+class Solution {
+    public ArrayList<Integer> postOrder(Node root) {
+        ArrayList<Integer> result = new ArrayList<>();
+        if (root == null) return result;
+
+        Stack<Node> stack = new Stack<>();
+        stack.push(root);
+
+        // Modified preorder: Root → Right → Left
+        while (!stack.isEmpty()) {
+            Node node = stack.pop();
+            result.add(node.data);
+
+            if (node.left != null) stack.push(node.left);
+            if (node.right != null) stack.push(node.right);
+        }
+
+        // Reverse to get Postorder: Left → Right → Root
+        Collections.reverse(result);
+        return result;
+    }
+}
