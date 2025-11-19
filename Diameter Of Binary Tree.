@@ -1,0 +1,24 @@
+class Solution {
+
+    public int diameterOfBinaryTree(TreeNode root) {
+        int[] diameter = new int[1];   // store answer
+        height(root, diameter);        // call helper
+        return diameter[0];
+    }
+
+    // this function returns height of node
+    // and updates diameter[] during recursion
+    private int height(TreeNode root, int[] diameter) {
+
+        if (root == null) return 0;
+
+        int lh = height(root.left, diameter);   // left height
+        int rh = height(root.right, diameter);  // right height
+
+        // update diameter → your logic: max of (lh + rh)
+        diameter[0] = Math.max(diameter[0], lh + rh);
+
+        // return height
+        return 1 + Math.max(lh, rh);
+    }
+}
