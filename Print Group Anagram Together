@@ -1,0 +1,52 @@
+class Solution {
+    public ArrayList<ArrayList<String>> anagrams(String[] arr) {
+        // code here
+        Map<String , List<String>> map = new HashMap<>();
+        
+        for(String word : arr){
+            char[] chars = word.toCharArray();
+            
+            Arrays.sort(chars);
+            
+            String key = new String(chars); // ✅ use sorted characters as key
+            
+            if(!map.containsKey(key)){
+                map.put(key , new ArrayList<>());
+            }
+            map.get(key).add(word);
+        }
+        
+        // ✅ fix generics issue by creating a new ArrayList for each group
+        ArrayList<ArrayList<String>> result = new ArrayList<>();
+        for (List<String> group : map.values()) {
+            result.add(new ArrayList<>(group));
+        }
+        return result;
+    }
+}
+/*
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+
+        // Map to store sorted word as key and list of anagrams as value
+        Map<String, List<String>> map = new HashMap<>();
+        // Loop through each word in the input array
+        for (String word : strs) {
+            // Convert word to character array
+            char[] chars = word.toCharArray();
+            // Sort characters to get common form for anagrams
+            Arrays.sort(chars);
+            // Convert sorted characters back to string (key)
+            String key = new String(chars);
+            // If key not present, create new list
+            if (!map.containsKey(key)) {
+                map.put(key, new ArrayList<>());
+            }
+            // Add original word to its anagram group
+            map.get(key).add(word);
+        }
+        return new ArrayList<>(map.values());
+    }
+}
+
+*/
