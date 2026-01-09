@@ -1,0 +1,32 @@
+class Solution {
+    public boolean isValid(String s) {
+
+        // Stack to store opening brackets
+        Stack<Character> stack = new Stack<>();
+
+        // Traverse each character in the string
+        for (char ch : s.toCharArray()) {
+
+            // If the character is an opening bracket, push it onto the stack
+            if (ch == '(' || ch == '[' || ch == '{') {
+                stack.push(ch);
+            } 
+            // If the character is a closing bracket
+            else {
+                // If stack is empty, no matching opening bracket exists
+                if (stack.empty()) return false;
+
+                // Pop the last opening bracket from the stack
+                char top = stack.pop();
+
+                // Check if the closing bracket matches the opening bracket
+                if (ch == ')' && top != '(') return false;
+                if (ch == ']' && top != '[') return false;
+                if (ch == '}' && top != '{') return false;
+            }
+        }
+
+        // If stack is empty, all brackets are balanced
+        return stack.isEmpty();
+    }
+}
