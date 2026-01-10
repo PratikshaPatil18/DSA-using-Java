@@ -1,0 +1,25 @@
+class Solution {
+    public int removeElement(int[] nums, int val) {
+
+        // k keeps track of the index where the next valid element should be placed
+        int k = 0;
+
+        // Traverse through the entire array
+        for (int i = 0; i < nums.length; i++) {
+
+            // If the current element is NOT equal to the value to be removed
+            if (nums[i] != val) {
+
+                // Place the valid element at index k
+                nums[k] = nums[i];
+
+                // Move k to the next position
+                k++;
+            }
+        }
+
+        // k represents the number of elements not equal to val
+        // This is the new length of the modified array
+        return k;
+    }
+}
