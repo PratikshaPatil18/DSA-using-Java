@@ -1,0 +1,23 @@
+class Solution {
+    // Function to remove duplicates from the given array.
+    ArrayList<Integer> removeDuplicates(int[] arr) {
+
+        int i = 0;
+        ArrayList<Integer> result = new ArrayList<>();
+
+        // Two-pointer technique
+        for (int j = 1; j < arr.length; j++) {
+            if (arr[i] != arr[j]) {
+                i++;
+                arr[i] = arr[j];
+            }
+        }
+
+        // Store unique elements in ArrayList
+        for (int k = 0; k <= i; k++) {
+            result.add(arr[k]);
+        }
+
+        return result;
+    }
+}
