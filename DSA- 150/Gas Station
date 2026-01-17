@@ -1,0 +1,31 @@
+class Solution {
+    public int canCompleteCircuit(int[] gas, int[] cost) {
+
+        // total gas available from all stations * total cost 
+        int totalGas = 0;
+        int totalCost = 0;
+        // current fuel in tank while travelling
+        int tank = 0;
+        // candidate starting station index
+        int start = 0;
+        for (int i = 0; i < gas.length; i++) {
+            // add current station gas and cost to totals
+            totalGas += gas[i];
+            totalCost += cost[i];
+            // update tank after leaving current station
+            tank += gas[i] - cost[i];
+
+            // if fuel becomes negative, cannot start from 'start'
+            if (tank < 0) {
+                // next station becomes new start
+                start = i + 1;
+
+                // reset tank for new start
+                tank = 0;
+            }
+        }
+        // if total gas is enough to cover total cost, return start
+        // otherwise, no solution exists
+        return totalGas >= totalCost ? start : -1;
+    }
+}
