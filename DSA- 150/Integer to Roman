@@ -1,0 +1,39 @@
+class Solution {
+    public String intToRoman(int num) {
+
+        // Step 1: Store Roman numeral values in descending order
+        // Subtraction cases (900, 400, 90, 40, 9, 4) are included
+        int[] values = {
+            1000, 900, 500, 400, 
+            100, 90, 50, 40, 
+            10, 9, 5, 4, 1
+        };
+
+        // Step 2: Corresponding Roman symbols
+        String[] symbols = {
+            "M", "CM", "D", "CD",
+            "C", "XC", "L", "XL",
+            "X", "IX", "V", "IV", "I"
+        };
+
+        // Step 3: StringBuilder to build the Roman numeral result
+        StringBuilder result = new StringBuilder();
+
+        // Step 4: Traverse all Roman values
+        for (int i = 0; i < values.length; i++) {
+
+            /*
+             Step 5: While the current number is greater than or
+             equal to the Roman value, keep subtracting and appending
+             the corresponding symbol
+            */
+            while (num >= values[i]) {
+                num -= values[i];          // subtract Roman value
+                result.append(symbols[i]); // append Roman symbol
+            }
+        }
+
+        // Step 6: Return the final Roman numeral
+        return result.toString();
+    }
+}
