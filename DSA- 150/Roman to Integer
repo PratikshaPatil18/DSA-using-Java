@@ -1,0 +1,41 @@
+class Solution {
+    public int romanToInt(String s) {
+
+        // Step 1: Create a map to store Roman numeral values
+        HashMap<Character, Integer> map = new HashMap<>();
+        map.put('I', 1);     // I = 1
+        map.put('V', 5);     // V = 5
+        map.put('X', 10);    // X = 10
+        map.put('L', 50);    // L = 50
+        map.put('C', 100);   // C = 100
+        map.put('D', 500);   // D = 500
+        map.put('M', 1000);  // M = 1000
+
+        // Step 2: Variable to store final integer value
+        int sum = 0;
+
+        // Step 3: Traverse the Roman string character by character
+        for (int i = 0; i < s.length(); i++) {
+
+            // Get value of current Roman character
+            int curr = map.get(s.charAt(i));
+
+            /*
+             Step 4: Check subtraction case
+             If current value is smaller than the next value,
+             subtract current value from sum
+             Example: IV → I < V → subtract 1
+            */
+            if (i < s.length() - 1 && curr < map.get(s.charAt(i + 1))) {
+                sum -= curr;
+            } 
+            // Step 5: Normal addition case
+            else {
+                sum += curr;
+            }
+        }
+
+        // Step 6: Return the final converted integer
+        return sum;
+    }
+}
