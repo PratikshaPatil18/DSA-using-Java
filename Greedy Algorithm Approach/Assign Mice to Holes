@@ -1,0 +1,27 @@
+class Solution {
+    
+    public int assignHole(int[] mices, int[] holes) {
+        
+        int n = mices.length;
+        
+        Arrays.sort(mices);
+        Arrays.sort(holes);
+        
+        int i = 0;
+        
+        int result = 0;
+        
+        while(i < n) {
+            
+            // Distance between mouse and hole
+            int ans = Math.abs(mices[i] - holes[i]);
+            
+            // Store maximum distance
+            result = Math.max(result, ans);
+            
+            i++;
+        }
+        
+        return result;
+    }
+}
