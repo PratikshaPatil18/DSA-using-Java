@@ -1,0 +1,36 @@
+class Solution {
+    
+    static int rotationCount(long R, long D) {
+        
+        // Store total minimum rotations
+        int ans = 0;
+        
+        // Variables to store digits
+        long first = 0, second = 0;
+        
+        // Run until all digits are processed
+        while(R > 0 || D > 0) {
+            
+            // Get last digit of both numbers
+            first = R % 10;
+            second = D % 10;
+            
+            // Remove last digit
+            R /= 10;
+            D /= 10;
+            
+            // Add minimum rotations
+            ans += Math.min(
+                    
+                    // Direct rotation distance
+                    Math.abs((int)(first - second)),
+                    
+                    // Circular rotation distance
+                    10 - Math.abs((int)(first - second))
+                  );
+        }
+        
+        // Return total rotations
+        return ans;
+    }
+}
