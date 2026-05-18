@@ -1,0 +1,52 @@
+class Solution {
+    
+    public List<Integer> maxMeetings(int[] s, int[] f) {
+        
+        // Total meetings
+        int n = s.length;
+        
+        // Store answer
+        List<Integer> ans = new ArrayList<>();
+        
+        // 2D array to store:
+        // start time, finish time, meeting number
+        int meet[][] = new int[n][3];
+        
+        // Store meeting data
+        for(int i = 0; i < n; i++) {
+            
+            meet[i][0] = s[i];
+            meet[i][1] = f[i];
+            meet[i][2] = i + 1;
+        }
+        
+        // Sort meetings by finish time
+        Arrays.sort(meet, (a, b) -> a[1] - b[1]);
+        
+        // Store end time of last selected meeting
+        int lastEnd = -1;
+        
+        // Traverse all meetings
+        for(int[] m : meet) {
+            
+            int start = m[0];
+            int finish = m[1];
+            int pos = m[2];
+            
+            // Select non-overlapping meeting
+            if(start > lastEnd) {
+                
+                ans.add(pos);
+                
+                // Update ending time
+                lastEnd = finish;
+            }
+        }
+        
+        // Sort answer by meeting number
+        Collections.sort(ans);
+        
+        // Return selected meetings
+        return ans;
+    }
+}
