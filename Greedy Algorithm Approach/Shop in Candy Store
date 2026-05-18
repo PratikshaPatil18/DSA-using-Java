@@ -1,0 +1,53 @@
+class Solution {
+    
+    public ArrayList<Integer> minMaxCandy(int[] prices, int k) {
+        
+        // Store minimum and maximum cost
+        ArrayList<Integer> ans = new ArrayList<>();
+       
+        // Total number of candies
+        int n = prices.length;
+        
+        // Sort candy prices
+        Arrays.sort(prices);
+       
+        int i = 0, j = n - 1;
+        
+        int min_cost = 0;
+        int max_cost = 0;
+        
+        // Calculate minimum cost
+        while(i <= j) {
+            
+            // Buy cheapest candy
+            min_cost = min_cost + prices[i];
+            
+            i++;
+            
+            // Get k costly candies free
+            j = j - k;
+        }
+        
+        // Reset pointers
+        i = 0;
+        j = n - 1;
+       
+        // Calculate maximum cost
+        while(j >= i) {
+            
+            // Buy costliest candy
+            max_cost = max_cost + prices[j];
+            
+            j--;
+            
+            // Get k cheapest candies free
+            i = i + k;
+        }
+        
+        // Store answers
+        ans.add(min_cost);
+        ans.add(max_cost);
+        
+        return ans;
+    }
+}
