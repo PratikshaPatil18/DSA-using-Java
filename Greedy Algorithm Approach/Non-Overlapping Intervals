@@ -1,0 +1,40 @@
+import java.util.*;
+
+class Solution {
+
+    public int minRemoval(int intervals[][]) {
+
+        int n = intervals.length;
+
+        // Sort intervals based on ending time
+        Arrays.sort(intervals, (a, b) -> a[1] - b[1]);
+
+        // Store end time of first interval
+        int end = intervals[0][1];
+
+        // Count removed intervals
+        int remove = 0;
+
+        // Traverse remaining intervals
+        for (int i = 1; i < n; i++) {
+
+            // Current interval start time
+            int start = intervals[i][0];
+
+            // If intervals overlap
+            if (start < end) {
+
+                // Remove current interval
+                remove++;
+
+            } else {
+
+                // Update end time when no overlap
+                end = intervals[i][1];
+            }
+        }
+
+        // Return minimum removals required
+        return remove;
+    }
+}
