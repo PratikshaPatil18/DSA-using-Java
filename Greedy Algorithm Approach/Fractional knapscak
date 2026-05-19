@@ -1,0 +1,55 @@
+import java.util.*;
+
+class Solution {
+
+    // Function to return maximum profit
+    public double fractionalKnapsack(int[] val, int[] wt, int capacity) {
+
+        int n = val.length;
+
+        // 2D array to store:
+        // temp[i][0] = value
+        // temp[i][1] = weight
+        // temp[i][2] = value/weight ratio
+        double [][] temp = new double[n][3];
+
+        for (int i = 0; i < n; i++) {
+
+            temp[i][0] = val[i];   // store value
+            temp[i][1] = wt[i];    // store weight
+
+            // calculate value per unit weight
+            temp[i][2] = (double) val[i] / wt[i];
+        }
+
+        // Sort items according to ratio in descending order
+          Arrays.sort(temp, (a, b) -> Double.compare(b[2], a[2]));
+
+        double profit = 0;
+
+        // Traverse all items
+        for (int i = 0; i < n; i++) {
+
+            // If whole item can be taken
+            if (capacity >= temp[i][1]) {
+
+                // Add full value to profit
+                profit += temp[i][0];
+
+                // Reduce remaining capacity
+                capacity -= temp[i][1];
+
+            } else {
+
+                // Take fractional part of item
+                profit += temp[i][2] * capacity;
+
+                // Knapsack is full
+                break;
+            }
+        }
+
+        // Return maximum profit
+        return profit;
+    }
+}
